@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npm run dev --prefix admin/frontend",
-    "build": "npm run build --prefix admin/frontend",
-    "start": "npm run start --prefix admin/frontend",
+    "dev": "cd admin/frontend && npm run dev",
+    "build": "cd admin/frontend && npm run build",
+    "start": "cd admin/frontend && npm run start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
