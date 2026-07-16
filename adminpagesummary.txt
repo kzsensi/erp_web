@@ -1,0 +1,469 @@
+School ERP Admin Frontend SummaryDate: 13 July 2026
+
+Purpose of this documentThis file records the admin frontend decisions so the same thinking can be reused when building the parent, teacher/staff, and super-admin panels. The goal is to keep the ERP practical, clear, and fast to demo even before the Django backend is complete.
+
+Main frontend direction
+
+The admin panel was simplified from a large ERP sitemap into a smaller operational interface. The reason was not to remove future functionality permanently. The reason was to make the current frontend useful, understandable, and demo-ready within limited time.
+
+The admin user should immediately see the daily school operations that matter most:
+
+Students
+
+Staff
+
+Attendance
+
+Leave
+
+Fees
+
+Dues
+
+Timetable
+
+Messages and announcements
+
+Holidays
+
+Departments
+
+Exam schedule
+
+This makes the admin panel easier to use because it follows how a real school office works during the day. The dashboard and sidebar now prioritize tasks that an admin actually needs to perform repeatedly.
+
+Why some sidebar buttons were removed or hidden
+
+The original admin sidebar had too many modules visible at once. That created visual clutter and made every section look equally important. When everything is visible, the user has no clear guide for where to start.
+
+Buttons were removed or reduced from the main sidebar for these reasons:
+
+Too many visible buttons slow down navigation.
+
+Many modules are future features, not mandatory for the first working version.
+
+Some pages were empty or generic, so they made the ERP look unfinished.
+
+Admin users mostly need daily operational pages first.
+
+Rarely used pages can be added later inside settings, reports, or advanced sections.
+
+A shorter sidebar improves mobile responsiveness.
+
+A shorter sidebar makes the product look more professional and less experimental.
+
+The removed or hidden sections are not rejected permanently. They are postponed until the core workflows are stable.
+
+Why main sections were kept only
+
+The main sections were kept because they support the mandatory school workflows:
+
+Dashboard: quick operational status
+
+Students: admission, records, documents, attendance, leave, dues
+
+Staff: teaching and non-teaching records
+
+Departments: staff organization
+
+Attendance: daily student and staff attendance
+
+Leave: student and staff leave approval/listing
+
+Fees: due list and fee structure
+
+Communication: messages and announcements
+
+Holidays: add and view holiday planning
+
+Timetable: class-wise timetable upload/view
+
+Examinations: exam schedule planning
+
+These sections are enough to show a working school ERP frontend even without backend integration. They also create a clear base for connecting Django APIs later.
+
+Admin dashboard decision
+
+The dashboard was changed to show only important information instead of many equal cards and widgets.
+
+The dashboard should focus on:
+
+Total active students
+
+Total staff
+
+Today's attendance status
+
+Pending documents
+
+Pending leave requests
+
+Fee dues
+
+Recent messages or announcements
+
+Upcoming holidays or exams
+
+Quick actions such as add student, add staff, send message, add holiday, and upload timetable
+
+The dashboard should not become a full reports page. Reports, analytics, and secondary charts can be added later. For now, the dashboard should guide the admin to the next important action.
+
+Visual and UX decisions
+
+The frontend was adjusted to feel like a professional school ERP, not a generic template.
+
+Design rules followed:
+
+No emoji icons
+
+No generic decorative icons
+
+No heavy gradients
+
+No purple theme
+
+Restrained colors only
+
+Clear hover effects
+
+Clear active sidebar state
+
+Better visual hierarchy
+
+Tables and forms that look operational, not decorative
+
+Mobile responsive layout
+
+Each page should clearly show what it is for
+
+The goal is not to make the UI flashy. The goal is to make it clear, reliable, and easy for school admins to understand quickly.
+
+Specific admin pages created or improved
+
+The following pages were made as focused frontend pages, not generic placeholder screens:
+
+/admin/attendance/student-attendance
+
+/admin/attendance/staff-attendance
+
+/admin/staff/all-staff
+
+/admin/staff/teachers
+
+/admin/staff/non-teaching
+
+/admin/setup/departments
+
+/admin/leave/student-leave
+
+/admin/leave/staff-leave
+
+/admin/fees/due-list
+
+/admin/fees/fee-structure
+
+/admin/communication/messages
+
+/admin/communication/announcements
+
+/admin/events-holidays/add-holiday
+
+/admin/timetable/all
+
+/admin/examinations/exam-schedule
+
+These pages use realistic mock frontend data so the product can be shown as working even before backend logic is complete.
+
+What each page is meant to show
+
+Student AttendanceShows daily class-wise student attendance, filters by class/section/status, attendance summary, and student attendance rows. This page supports the admin checking whether attendance was completed.
+
+Staff AttendanceShows daily attendance for teaching and non-teaching staff, including check-in, check-out, late, absent, and department/category details.
+
+All StaffShows the complete staff directory with staff type, department, designation, contact, and status. This is the main staff management list.
+
+TeachersShows only teaching staff with subject/class context. This helps admin quickly understand teacher allocation.
+
+Non-Teaching StaffShows support, office, transport, security, and other non-teaching staff separately from teachers.
+
+DepartmentsShows school departments with department head, staff count, category, and operational status. This gives structure to staff management.
+
+Student LeaveShows student leave requests and allows mock approval/rejection states. This page is useful for demo because the action feels real.
+
+Staff LeaveShows staff leave requests separately from students. It supports admin checking substitute planning and staff availability.
+
+Dues ListShows students with pending fees, amount due, due date, class, guardian, and reminder action. This is one of the most important admin finance pages.
+
+Fee StructureShows fee heads and class-wise fee structure. This page explains how fees are configured before collection and dues tracking.
+
+MessagesShows communication threads and message sending UI. It demonstrates admin-to-parent/staff/student communication.
+
+AnnouncementsShows announcement composer, audience selection, channels, and published announcement list. This is for school-wide notices.
+
+Add HolidayShows a proper holiday creation form with date, type, audience, description, and calendar preview.
+
+TimetableShows class-wise timetable upload/view flow. The important action is selecting a class and uploading or managing its timetable.
+
+Exam ScheduleShows exam timetable planning with classes, subjects, dates, timings, and schedule status.
+
+Why mock data and frontend interactions were added
+
+Backend is not ready yet, but the frontend still needs to feel usable. Mock data makes the UI easier to review and demonstrate.
+
+Mock frontend interactions include:
+
+Filtering visible records
+
+Switching tabs
+
+Selecting classes or staff groups
+
+Approving/rejecting leave requests
+
+Sending a mock message
+
+Publishing a mock announcement
+
+Saving a mock holiday
+
+Showing timetable and exam schedule previews
+
+Sending due reminders as a mock action
+
+These interactions help stakeholders understand the product flow before Django APIs are connected.
+
+Admin section strategy
+
+The admin panel is the operational center for one school. It should not be mixed with super-admin platform management, teacher classroom workflows, or parent/student self-service.
+
+Admin owns:
+
+Student records
+
+Staff records
+
+Attendance supervision
+
+Fee setup and dues
+
+Leave requests
+
+School notices
+
+Holidays
+
+Timetable upload
+
+Exam schedule planning
+
+Department setup
+
+Admin should not own:
+
+Platform subscription management
+
+School onboarding across multiple schools
+
+Super-admin security controls
+
+Parent payment-only dashboard
+
+Teacher marks/attendance classroom workflow as the main user
+
+Keeping these responsibilities separate will make future panels easier to design.
+
+How this becomes the blueprint for other panels
+
+Parent/Family PanelThe parent panel should be simpler than admin. It should show only the information related to the parent's child or children.
+
+Parent panel main sections should be:
+
+Dashboard
+
+Children
+
+Attendance
+
+Timetable
+
+Fees and payments
+
+Leave request
+
+Messages
+
+Announcements
+
+Events and holidays
+
+Documents
+
+Support
+
+Parent panel should not show admin controls like departments, staff lists, fee structure editing, or exam schedule management. It should mostly be read-only with selected actions such as payment, leave application, and messaging.
+
+Teacher/Staff PanelThe teacher panel should focus on daily classroom work.
+
+Teacher panel main sections should be:
+
+Dashboard
+
+My profile
+
+My timetable
+
+My classes
+
+Students assigned to me
+
+Mark attendance
+
+Submitted attendance
+
+Marks or exam entry
+
+Leave apply
+
+My leave requests
+
+Messages
+
+Announcements
+
+Events and holidays
+
+Support
+
+Teacher should not see full admin fee management, staff-wide HR controls, or school setup pages. Teachers need fast access to their assigned classes and daily responsibilities.
+
+Super-Admin PanelThe super-admin panel is for platform-level control across schools.
+
+Super-admin main sections should be:
+
+Dashboard
+
+Schools
+
+Add school
+
+Active schools
+
+Suspended schools
+
+School subscriptions
+
+Platform users
+
+Support tickets
+
+Security
+
+Audit logs
+
+Storage and backup status
+
+Settings
+
+Super-admin should not manage daily attendance or individual student leave unless accessing a specific school in a support or audit context. Its job is platform management, not school office operations.
+
+Shared design rules for future panels
+
+The same UI principles should be used for parent, teacher, and super-admin:
+
+Keep only role-relevant sidebar items.
+
+Avoid showing every possible future module.
+
+Use clear page titles and real page-specific content.
+
+Avoid generic placeholder pages.
+
+Keep dashboards short and action-oriented.
+
+Use mock data until backend is ready.
+
+Use restrained color and hover states.
+
+Make pages mobile responsive from the beginning.
+
+Use one consistent icon style.
+
+Keep forms and tables practical.
+
+Do not mix responsibilities between roles.
+
+Implementation tracking
+
+Current frontend stack:
+
+Next.js frontend
+
+Mock data only
+
+Django backend planned later
+
+PostgreSQL database planned later
+
+Current admin frontend work completed:
+
+Focused admin routes created
+
+Page-specific UI added for the important admin sections
+
+Generic placeholder feeling reduced on requested pages
+
+Responsive CSS added for these pages
+
+Mock interactions added where useful
+
+Production build and lint checks passed at the time of implementation
+
+Important implementation files:
+
+components/operational-pages.tsx
+
+components/module-page.tsx
+
+app/globals.css
+
+requested-admin-pages-only.zip
+
+Next development priority
+
+Before building more modules, the next priority should be finishing the role-based frontend structure:
+
+Parent/family dashboard and child overview
+
+Teacher dashboard and my classes
+
+Super-admin dashboard and school management
+
+Shared navigation pattern for all roles
+
+Shared mock data structure that can later be replaced by Django APIs
+
+This prevents the project from becoming a collection of unrelated pages. The goal is to build one ERP system with separate role experiences.
+
+Final direction
+
+The admin frontend was simplified because a professional ERP should guide the user. The first version should not try to show every possible feature. It should show the features that make the school run:
+
+students
+
+staff
+
+attendance
+
+leave
+
+fees
+
+communication
+
+holidays
+
+timetable
+
+exams
+
+Other modules can be added later after the core workflows are stable. This approach gives a better demo now and a cleaner architecture for parent, teacher, and super-admin panels later.
