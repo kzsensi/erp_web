@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import {
   Bell,
@@ -22,6 +22,7 @@ import {
 
 export function SuperAdminShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
 
@@ -84,7 +85,7 @@ export function SuperAdminShell({ children }: { children: React.ReactNode }) {
         <header className="topbar superadmin-topbar">
           <div className="topbar-left">
             <button className="icon-button menu-button" onClick={() => setMobileOpen(true)} aria-label="Open navigation"><Menu size={21} /></button>
-            <button className="back-button" aria-label="Go back"><ChevronLeft size={18} /></button>
+            <button className="back-button" onClick={() => router.back()} aria-label="Go back"><ChevronLeft size={18} /></button>
           </div>
           <Link href="/superadmin/dashboard" className="topbar-school" aria-label="Platform dashboard">
             <span>

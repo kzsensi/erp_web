@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import {
   Bell,
@@ -17,6 +17,7 @@ import { familyConfig, familyNavigation, familyUtilityNavigation } from "@/lib/f
 
 export function FamilyShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
 
@@ -79,7 +80,7 @@ export function FamilyShell({ children }: { children: React.ReactNode }) {
         <header className="topbar family-topbar">
           <div className="topbar-left">
             <button className="icon-button menu-button" onClick={() => setMobileOpen(true)} aria-label="Open navigation"><Menu size={21} /></button>
-            <button className="back-button" aria-label="Go back"><ChevronLeft size={18} /></button>
+            <button className="back-button" onClick={() => router.back()} aria-label="Go back"><ChevronLeft size={18} /></button>
           </div>
           <Link href="/family/dashboard" className="topbar-school" aria-label={`${familyConfig.schoolName} family dashboard`}>
             <span>
